@@ -3,6 +3,7 @@ body, html {
     padding: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
+    transition: background-color 0.55s ease;
 }
 #fluid-background {
     position: fixed;
@@ -34,27 +35,54 @@ button:hover {
     transform: scale(1.2);
 }
 
-#toggle-container {
-    position: absolute;
+#theme-toggle {
+    position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 10;
+    cursor: pointer;
+    width: 70px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#toggle {
+/* Hide the checkbox input */
+#theme-toggle input {
     display: none;
 }
 
+/* SVG styles */
 svg {
-    cursor: pointer;
+    width: 250px;
+    height: 250px;
+    transition: transform 0.3s;
 }
 
-#toggle:checked + svg rect {
-    fill: url(#gradient-dark); /* Cambia el fondo a oscuro */
+#theme-toggle rect {
+    transition: fill 0.3s;
 }
 
-#toggle:checked + svg circle {
-    transform: translateX(45px); /* Desplaza el círculo al lado oscuro */
+#theme-toggle circle {
+    transition: transform 0.3s;
+}
+
+/* Styles for light mode */
+#theme-toggle input:not(:checked) + svg rect {
+    fill: url(#gradient-light);
+}
+
+#theme-toggle input:not(:checked) + svg circle {
+    transform: translateX(0);
+}
+
+/* Styles for dark mode */
+#theme-toggle input:checked + svg rect {
+    fill: url(#gradient-dark);
+}
+
+#theme-toggle input:checked + svg circle {
+    transform: translateX(40px);
 }
 
 
@@ -64,7 +92,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
     overflow: hidden;
 }
 
