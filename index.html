@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Dinámica</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="fluid-background"></canvas>
+    <div class="menu">
+        <button onclick="location.href='rompecabezas.html'">Rompecabezas</button>
+        <button onclick="location.href='mensaje.html'">Mensaje</button>
+    </div>
+    <div id="toggle-container">
+        <label for="toggle">
+            <input type="checkbox" id="toggle" />
+            <svg viewBox="0 0 100 45" width="50" height="25">
+                <defs>
+                    <linearGradient id="gradient-light" x1="0" x2="0" y1="0" y2="1">
+                        <stop stop-color="#8bc8f2" offset="0"></stop>
+                        <stop stop-color="#fff" offset="1"></stop>
+                    </linearGradient>
+                    <linearGradient id="gradient-dark" x1="0" x2="0" y1="0" y2="1">
+                        <stop stop-color="#1F2241" offset="0"></stop>
+                        <stop stop-color="#7D59DF" offset="1"></stop>
+                    </linearGradient>
+                </defs>
+                <rect id="background" x="0" y="0" width="90" height="40" rx="20" style="fill: url(#gradient-light)"></rect>
+                <circle cx="20" cy="20" r="15" style="fill: #fff;"></circle>
+            </svg>
+        </label>
+    </div>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
