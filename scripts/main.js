@@ -1,4 +1,5 @@
 const canvas = document.getElementById('fluid-background');
+const fluidToggleButton = document.getElementById("fluid-toggle");
 const ctx = canvas.getContext('2d');
 
 canvas.width = window.innerWidth;
@@ -72,3 +73,68 @@ function animateFluidBackground() {
 
 window.addEventListener('mousemove', createFluidEffect);
 animateFluidBackground();
+
+let fluidActive = false; // Controla el estado del fluido
+
+// Función para cambiar el estado de la explosión y activar el fluido
+fluidToggleButton.addEventListener("click", () => {
+    fluidActive = !fluidActive;
+
+    // Activa/desactiva el estado "on" y la animación de explosión
+    fluidToggleButton.classList.toggle("active", fluidActive);
+    fluidToggleButton.classList.add("exploding");
+    
+    // Activar/desactivar animación de fondo
+    if (fluidActive) {
+        canvas.classList.add("explosion-bg");
+        createParticles();  // Si está activo, crea partículas para el fluido
+    } else {
+        canvas.classList.remove("explosion-bg");
+        particles = [];  // Desactiva las partículas
+    }
+
+    setTimeout(() => {
+        fluidToggleButton.classList.remove("exploding");
+    }, 1000);  // Elimina el efecto de explosión después de 0.5 segundos
+});
+
+// Función para crear partículas
+function createParticles() {
+    particles = [];
+    for (let i = 0; i < 100; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        if (fluidActive) {
+            particles.push(new ParticleType1(x, y)); // Crea partículas de Fluido Tipo 1
+        }
+    }
+}
+
+// Fluido Tipo 1 - Partículas que siguen el movimiento del mouse
+function ParticleType1(x, y) {
+    this.x = x;
+    this.y = y;
+    this.size = Math.random() * 40 + 1;
+    this.speedX = Math.random() * 3 - 1.5;
+    this.speedY = Math.random() * 3 - 1.5;
+    this.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+}
+
+ParticleType1.prototype.update = function () {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.size > 0.2) this.size -= 0.1;
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+};
+
+// Animación para las partículas
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(particle => particle.update());
+    requestAnimationFrame(animate);
+}
+
+animate();
