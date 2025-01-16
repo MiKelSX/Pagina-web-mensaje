@@ -8,18 +8,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Clarkson:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+    <!-- Sobre de carta -->
+    <div class="envelope" onclick="toggleEnvelope()">
+        <div class="envelope-top"></div>
+        <div class="envelope-bottom"></div>
+        <p class="envelope-label">Para: Belén</p> <!-- Añadido el texto aquí -->
+    </div>
+
+    <!-- Contenido de la carta -->
+    <div class="container" id="message" style="display: none;">
         <div class="card">
             <div class="content">
                 <h2>❤️</h2>
                 <h3>Querida Belén,</h3>
                 <p>Te saludo desde la última vez que te vi, han pasado varios días desde que nos vimos, trato de mantenerme de aprender,
-                    estudiar, practicar, de hacer ejercicios y de relajación. Recuerdo que aun podríamos jugar o recrear algo contigo,
-                    lo bien que es comunicar. Me gustaría saber cómo te encuentras, cómo has estado y qué has estado haciendo,
-                    quizás podría invitarte a comer a algún lugar, o comer completos, churrascos, o solo tomar café, conversar y recrear nuevos tiempos.</p>
+                    estudiar, practicar, de hacer ejercicios y de relajarme. Recuerdo que aún podríamos jugar o recrear algo contigo,
+                    lo bien que es comunicarse. Me gustaría saber cómo te encuentras, cómo has estado y qué has estado haciendo.
+                    Quizás podría invitarte a comer a algún lugar, comer completos, churrascos, o solo tomar café, conversar y recrear nuevos tiempos.</p>
                 <h4>Atentamente, MiKelSX</h4>
                 <div class="signature">
-                <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXZ0MmNoMHA5Z2VrNWt6OTI4N2wyeXcyaDNmZ2N2anlkdndmbWQ3cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif" alt="GIF de amor" class="gif">
+                    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXZ0MmNoMHA5Z2VrNWt6OTI4N2wyeXcyaDNmZ2N2anlkdndmbWQ3cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif" alt="GIF de amor" class="gif">
                 </div>
             </div>
         </div>
@@ -33,6 +41,34 @@
             glare: true,
             "max-glare": 0.4,
         });
+    </script>
+    <script>
+        VanillaTilt.init(document.querySelectorAll(".envelope"), {
+            max: 25,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.4,
+        });
+    </script>
+    <script>
+        let state = 0; // 0: sobre cerrado, 1: tapa abierta, 2: mensaje mostrado
+
+        function toggleEnvelope() {
+            const envelope = document.querySelector('.envelope');
+            const message = document.getElementById('message');
+
+            if (state === 0) {
+                // Abre la tapa del sobre
+                envelope.querySelector('.envelope-top').style.transform = 'rotateX(0deg)';
+                state = 1;
+            } else if (state === 1) {
+                // El sobre se oculta y muestra el mensaje
+                envelope.style.display = 'none';
+                message.style.display = 'block';
+                state = 2;
+            }
+        }
+
     </script>
 </body>
 </html>

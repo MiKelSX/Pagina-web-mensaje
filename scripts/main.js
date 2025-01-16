@@ -21,6 +21,21 @@ const toggle = document.getElementById('toggle');
 const circle = document.querySelector('circle');
 const background = document.getElementById('background');
 
+// Verificar si hay un tema guardado en localStorage
+if (localStorage.getItem('theme') === 'dark') {
+    // Si el tema es oscuro, aplicar el estilo correspondiente
+    toggle.checked = true;
+    circle.style.fill = '#000';
+    background.style.fill = 'url(#gradient-dark)';
+    document.body.style.backgroundColor = '#1f1f1f'; // Fondo oscuro de la página
+} else {
+    // Si no hay tema guardado o es claro, aplicar el estilo claro
+    toggle.checked = false;
+    circle.style.fill = '#fff';
+    background.style.fill = 'url(#gradient-light)';
+    document.body.style.backgroundColor = '#fff'; // Fondo claro de la página
+}
+
 // Escuchar el cambio del estado del checkbox
 toggle.addEventListener('change', function() {
     if (toggle.checked) {
@@ -28,13 +43,20 @@ toggle.addEventListener('change', function() {
         circle.style.fill = '#000';  // Cambiar el color del círculo a negro
         background.style.fill = 'url(#gradient-dark)';  // Cambiar el fondo a oscuro
         document.body.style.backgroundColor = '#1f1f1f'; // Fondo oscuro de la página
+
+        // Guardar la preferencia en localStorage
+        localStorage.setItem('theme', 'dark');
     } else {
         // Cuando el checkbox no está marcado (fondo claro)
         circle.style.fill = '#fff';  // Cambiar el color del círculo a blanco
         background.style.fill = 'url(#gradient-light)';  // Cambiar el fondo a claro
         document.body.style.backgroundColor = '#fff'; // Fondo claro de la página
+
+        // Guardar la preferencia en localStorage
+        localStorage.setItem('theme', 'light');
     }
 });
+
 
 
 
@@ -110,7 +132,7 @@ function createParticles() {
     }
 }
 
-// Fluido Tipo 1 - Partículas que siguen el movimiento del mouse
+// Fluido, Partículas que siguen el movimiento del mouse
 function ParticleType1(x, y) {
     this.x = x;
     this.y = y;

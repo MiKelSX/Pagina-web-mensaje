@@ -21,6 +21,82 @@ body {
     100% { background-position: 0% 50%; }
 }
 
+.envelope {
+    position: relative;
+    width: 550px;
+    height: 400px;
+    margin: 150px auto;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.envelope-top {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background-color: #e48c77;
+    clip-path: polygon(0% 100%, 50% 10%, 100% 100%);
+    top: -198px;
+    left: 0;
+    border-radius: 15px;  /* Bordes redondeados */
+    transform-origin: bottom;
+    transform: rotateX(-180deg);  /* Inicia con el sobre cerrado */
+    transition: transform 0.5s ease-in-out;
+    z-index: 2;
+    border: 1px solid #6d363686;
+}
+
+.envelope-bottom {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #e21212;
+    border: 3px solid #f6f5f5;
+    border-radius: 13px;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* Abrir el sobre */
+.envelope.open .envelope-top {
+    transform: rotateX(0deg);  /* Abre el sobre */
+}
+
+.envelope.open .envelope-bottom {
+    background-color: #f2f2f2;
+}
+
+/* Animación para el mensaje */
+.container {
+    display: none;
+    animation: fadeIn 0.8s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.envelope-label {
+    position: absolute;
+    bottom: 100px; /* Coloca el texto cerca de la parte inferior */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    color: #ffffff;
+    font-weight: bold;
+    z-index: 3; /* Asegura que el texto esté por encima de la tapa */
+}
+
+
 .container {
     position: relative;
     display: flex;
@@ -37,7 +113,7 @@ body {
     position: relative;
     width: 550px;
     height: 600px;
-    margin: 150px;
+    margin: 150px auto;
     box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     background:rgba(255, 255, 255, 0.1);
