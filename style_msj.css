@@ -9,6 +9,11 @@ body {
     font-family: 'Clarkson', sans-serif;
     text-align: center;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
     padding: 0;
     overflow: hidden;
     background: linear-gradient(220deg, #39c3be, #21a1ab, #9aa72a);
