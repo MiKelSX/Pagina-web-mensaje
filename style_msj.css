@@ -10,6 +10,7 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+    overflow: hidden;
     background: linear-gradient(220deg, #39c3be, #21a1ab, #9aa72a);
     background-size: 500% 500%;
     animation: fondoAnimado 20s ease infinite;
