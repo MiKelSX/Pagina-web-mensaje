@@ -1,0 +1,85 @@
+/* Configuración global */
+body {
+    font-family: 'Clarkson', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg, #446dc7, #6ca8f7, #dfa1f8);
+    background-size: 400% 400%;
+    animation: fondoAnimado 10s ease infinite;
+    color: #303c4b;
+}
+
+/* Animación del fondo */
+@keyframes fondoAnimado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Hora */
+#hora {
+    font-size: 48px;
+    margin: 20px 0;
+}
+
+/* Tablero */
+#board {
+    width: 320px;
+    height: 320px;
+    border: 3px solid #2d4059;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Piezas del tablero */
+#board img {
+    width: 78px;
+    height: 78px;
+    border: 0.5px solid #1b78d6;
+    box-sizing: border-box;
+}
+
+/* Piezas iniciales */
+#pieces {
+    width: 340px;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+#pieces img {
+    width: 78px;
+    height: 78px;
+    border: 1px solid #adb5bd;
+    cursor: grab;
+}
+
+/* Mensaje de celebración */
+#celebration {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    animation: aparecer 1s ease-in-out;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes aparecer {
+    0% { opacity: 0; transform: translate(-50%, -40%); }
+    100% { opacity: 1; transform: translate(-50%, -50%); }
+}

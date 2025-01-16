@@ -134,42 +134,49 @@ svg {
 }
 
 
-body {
-    font-family: Arial, sans-serif;
+#clock {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+#puzzle-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#puzzle-board {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
+    margin-top: 30px;
+    border: 3px solid #000;
 }
 
-.sobre, .carta {
-    width: 300px;
-    height: 200px;
-    background-color: #fff;
-    border: 2px solid #9b4caf;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.5s;
+#puzzle-canvas {
+    width: 500px;
+    height: 500px;
 }
 
-.sobre {
-    background-color: #ad4444;
+.select-image {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ff5722;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 13px;
+    cursor: pointer;
 }
 
-.carta {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transform-style: preserve-3d;
+.select-image:focus {
+    outline: none;
 }
 
-#mensaje {
-    padding: 20px;
-}
-
-.carta, .sobre {
-    transition: transform 0.5s;
-    transform-origin: 50% 50%;
+select {
+    width: 100%;
+    margin-top: 20px;
 }

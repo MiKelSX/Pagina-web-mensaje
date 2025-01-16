@@ -1,69 +1,96 @@
-const puzzleContainer = document.getElementById('puzzle-container');
-const img = new Image();
-img.src = 'images/foto.png'; // Imagen para el rompecabezas
+const rows = 4;
+const columns = 4;
+let currTile;
+let otherTile;
 
-img.onload = () => {
-    const rows = 5;  // Filas
-    const cols = 6;  // Columnas
-    const pieceWidth = img.width / cols;
-    const pieceHeight = img.height / rows;
-    const pieces = [];
+// Inicializar el tablero
+window.onload = function () {
+    // Mostrar la hora
+    setInterval(() => {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        document.getElementById("hora").innerText = `${hours}:${minutes}`;
+    }, 1000);
 
-    // Crear las piezas del rompecabezas
-    for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-            const pieceCanvas = document.createElement('canvas');
-            const pieceCtx = pieceCanvas.getContext('2d');
-            pieceCanvas.width = pieceWidth;
-            pieceCanvas.height = pieceHeight;
+    // Crear el tablero de juego vacío
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < columns; c++) {
+            const tile = document.createElement("img");
+            tile.src = "./Imagenes/blank.jpg";
+            tile.addEventListener("dragstart", dragStart);
+            tile.addEventListener("dragover", dragOver);
+            tile.addEventListener("dragenter", dragEnter);
+            tile.addEventListener("drop", dragDrop);
+            tile.addEventListener("dragend", dragEnd);
 
-            // Dibujar la pieza de la imagen en el canvas
-            pieceCtx.drawImage(
-                img,
-                col * pieceWidth,
-                row * pieceHeight,
-                pieceWidth,
-                pieceHeight,
-                0,
-                0,
-                pieceWidth,
-                pieceHeight
-            );
-
-            pieces.push({ pieceCanvas, row, col });
-            puzzleContainer.appendChild(pieceCanvas);
-
-            pieceCanvas.style.position = 'absolute';
-            pieceCanvas.style.top = `${Math.random() * (puzzleContainer.clientHeight - pieceHeight)}px`;
-            pieceCanvas.style.left = `${Math.random() * (puzzleContainer.clientWidth - pieceWidth)}px`;
-
-            pieceCanvas.addEventListener('mousedown', (e) => {
-                pieceCanvas.style.zIndex = 10;
-                let offsetX = e.clientX - pieceCanvas.offsetLeft;
-                let offsetY = e.clientY - pieceCanvas.offsetTop;
-
-                function dragMove(event) {
-                    pieceCanvas.style.left = `${event.clientX - offsetX}px`;
-                    pieceCanvas.style.top = `${event.clientY - offsetY}px`;
-                }
-
-                function dragEnd() {
-                    document.removeEventListener('mousemove', dragMove);
-                    document.removeEventListener('mouseup', dragEnd);
-
-                    // Verificar si la pieza está en su lugar correcto
-                    if (
-                        Math.abs(pieceCanvas.offsetLeft - pieceWidth * pieces.find(p => p.row === row && p.col === col).col) < 10 &&
-                        Math.abs(pieceCanvas.offsetTop - pieceHeight * pieces.find(p => p.row === row && p.col === col).row) < 10
-                    ) {
-                        pieceCanvas.style.left = `${pieceWidth * pieces.find(p => p.row === row && p.col === col).col}px`;
-                        pieceCanvas.style.top = `${pieceHeight * pieces.find(p => p.row === row && p.col === col).row}px`;
-                    }
-                }
-
-                document.addEventListener('mousemove', dragMove);
-                document.addEventListener('mouseup', dragEnd);
-            });
+            document.getElementById("board").append(tile);
         }
     }
+
+    // Crear piezas mezcladas
+    const pieces = [];
+    for (let i = 1; i <= rows * columns; i++) {
+        pieces.push(i.toString());
+    }
+    pieces.sort(() => Math.random() - 0.5); // Mezclar piezas
+
+    // Añadir piezas al área de piezas
+    for (const piece of pieces) {
+        const tile = document.createElement("img");
+        tile.src = `./Imagenes/${piece}.jpg`;
+        tile.draggable = true;
+        tile.addEventListener("dragstart", dragStart);
+        tile.addEventListener("dragover", dragOver);
+        tile.addEventListener("dragenter", dragEnter);
+        tile.addEventListener("drop", dragDrop);
+        tile.addEventListener("dragend", dragEnd);
+
+        document.getElementById("pieces").append(tile);
+    }
 };
+
+// Funciones de arrastrar y soltar
+function dragStart() {
+    currTile = this;
+}
+
+function dragOver(e) {
+    e.preventDefault();
+}
+
+function dragEnter(e) {
+    e.preventDefault();
+}
+
+function dragDrop() {
+    otherTile = this;
+}
+
+function dragEnd() {
+    if (currTile.src.includes("blank")) return;
+
+    // Intercambiar imágenes
+    const currSrc = currTile.src;
+    const otherSrc = otherTile.src;
+    currTile.src = otherSrc;
+    otherTile.src = currSrc;
+
+    checkCompletion(); // Comprobar si el rompecabezas está completo
+}
+
+// Comprobar si el rompecabezas está completo
+function checkCompletion() {
+    const board = document.getElementById("board").children;
+    for (let i = 0; i < board.length; i++) {
+        const tileNumber = parseInt(board[i].src.split('/').pop().split('.')[0]); // Obtener número de imagen
+        if (tileNumber !== i + 1) return; // Si no está en orden, no está completo
+    }
+
+    // Reproducir sonido y mostrar celebración
+    const successSound = document.getElementById("success-sound");
+    successSound.play();
+    const celebration = document.getElementById("celebration");
+    celebration.classList.remove("hidden");
+    celebration.classList.add("show");
+}

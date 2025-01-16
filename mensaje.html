@@ -4,21 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mensaje</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style_msj.css">
+    <link href="https://fonts.googleapis.com/css2?family=Clarkson:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="sobre" class="sobre">
-        <div id="carta" class="carta">
-            <div id="mensaje" style="display:none;">
-                <h2>MiQuerida Belén,</h2>
-                <p>
-                    He estado pensando mucho en lo que sucedió y en cómo me gustaría que las cosas fueran diferentes. Espero que algún día podamos reencontrarnos y compartir los momentos que nos hicieron felices.
-                </p>
-                <p>Con cariño, MiKelSX</p>
+    <div class="container">
+        <div class="card">
+            <div class="content">
+                <h2>❤️</h2>
+                <h3>Querida Belén,</h3>
+                <p>Te saludo desde la última vez que te vi, han pasado varios días desde que nos vimos, trato de mantenerme de aprender,
+                    estudiar, practicar, de hacer ejercicios y de relajación. Recuerdo que aun podríamos jugar o recrear algo contigo,
+                    lo bien que es comunicar. Me gustaría saber cómo te encuentras, cómo has estado y qué has estado haciendo,
+                    quizás podría invitarte a comer a algún lugar, o comer completos, churrascos, o solo tomar café, conversar y recrear nuevos tiempos.</p>
+                <h4>Atentamente, MiKelSX</h4>
+                <div class="signature">
+                <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXZ0MmNoMHA5Z2VrNWt6OTI4N2wyeXcyaDNmZ2N2anlkdndmbWQ3cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif" alt="GIF de amor" class="gif">
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="scripts/mensaje.js"></script>
+    <script type="text/javascript" src="scripts/message.js"></script>
+    <script>
+        VanillaTilt.init(document.querySelectorAll(".card"), {
+            max: 25,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.4,
+        });
+    </script>
 </body>
 </html>

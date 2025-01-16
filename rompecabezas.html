@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rompecabezas</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div id="puzzle-container"></div>
-    <script src="scripts/puzzle.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rompecabezas</title>
+        <link rel="stylesheet" href="puzzle.css">
+        <script src="scripts/puzzle.js" defer></script>
+        <link href="https://fonts.googleapis.com/css2?family=Clarkson:wght@400&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <h1 id="hora"></h1>
+        <div id="board"></div>
+        <div id="pieces"></div>
+        <div id="celebration" class="hidden">
+            🎉 ¡Felicidades! Has completado el rompecabezas de Tommy. 🎉
+        </div>
+        <audio id="success-sound" src="Sound/winner.mp3"></audio>
+    </body>
 </html>
