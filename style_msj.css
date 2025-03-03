@@ -92,7 +92,7 @@ body {
     bottom: 100px; /* Coloca el texto cerca de la parte inferior */
     left: 50%;
     transform: translateX(-50%);
-    font-size: 40px;
+    font-size: 27.2px;
     color: #ffffff;
     font-weight: bold;
     z-index: 3; /* Asegura que el texto esté por encima de la tapa */
